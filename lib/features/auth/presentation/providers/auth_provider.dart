@@ -23,12 +23,14 @@ final authRepositoryProvider = Provider<AuthRepository>((ref) {
 });
 
 /// Auth state notifier
-class AuthNotifier extends StateNotifier<AsyncValue<User?>> {
-  final AuthRepository _repository;
-
-  AuthNotifier(this._repository) : super(const AsyncValue.data(null)) {
+class AuthNotifier extends Notifier<AsyncValue<User?>> {
+  @override
+  AsyncValue<User?> build() {
     _checkAuthStatus();
+    return const AsyncValue.data(null);
   }
+
+  AuthRepository get _repository => ref.read(authRepositoryProvider);
 
   Future<void> _checkAuthStatus() async {
     final isAuth = await _repository.isAuthenticated();
@@ -78,11 +80,8 @@ class AuthNotifier extends StateNotifier<AsyncValue<User?>> {
 }
 
 /// Auth state provider
-final authProvider = StateNotifierProvider<AuthNotifier, AsyncValue<User?>>((
-  ref,
-) {
-  final repository = ref.watch(authRepositoryProvider);
-  return AuthNotifier(repository);
+final authProvider = NotifierProvider<AuthNotifier, AsyncValue<User?>>(() {
+  return AuthNotifier();
 });
 
 /// Current user provider

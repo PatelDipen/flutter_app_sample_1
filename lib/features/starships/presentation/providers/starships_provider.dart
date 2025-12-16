@@ -17,15 +17,18 @@ final starshipsRepositoryProvider = Provider<StarshipsRepository>((ref) {
   return StarshipsRepositoryImpl(remoteDataSource: remoteDataSource);
 });
 
-class StarshipsNotifier extends StateNotifier<AsyncValue<List<Starship>>> {
-  final StarshipsRepository _repository;
+class StarshipsNotifier extends Notifier<AsyncValue<List<Starship>>> {
   int _currentPage = 1;
   bool _hasMore = true;
   List<Starship> _allStarships = [];
 
-  StarshipsNotifier(this._repository) : super(const AsyncValue.loading()) {
+  @override
+  AsyncValue<List<Starship>> build() {
     loadStarships();
+    return const AsyncValue.loading();
   }
+
+  StarshipsRepository get _repository => ref.read(starshipsRepositoryProvider);
 
   Future<void> loadStarships() async {
     if (!_hasMore) return;
@@ -72,9 +75,8 @@ class StarshipsNotifier extends StateNotifier<AsyncValue<List<Starship>>> {
 }
 
 final starshipsProvider =
-    StateNotifierProvider<StarshipsNotifier, AsyncValue<List<Starship>>>((ref) {
-      final repository = ref.watch(starshipsRepositoryProvider);
-      return StarshipsNotifier(repository);
+    NotifierProvider<StarshipsNotifier, AsyncValue<List<Starship>>>(() {
+      return StarshipsNotifier();
     });
 
 final starshipsSearchQueryProvider = StateProvider<String>((ref) => '');

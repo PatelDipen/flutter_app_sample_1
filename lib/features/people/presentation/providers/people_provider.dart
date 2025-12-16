@@ -18,15 +18,18 @@ final peopleRepositoryProvider = Provider<PeopleRepository>((ref) {
 });
 
 /// People list state notifier
-class PeopleNotifier extends StateNotifier<AsyncValue<List<Person>>> {
-  final PeopleRepository _repository;
+class PeopleNotifier extends Notifier<AsyncValue<List<Person>>> {
   int _currentPage = 1;
   bool _hasMore = true;
   List<Person> _allPeople = [];
 
-  PeopleNotifier(this._repository) : super(const AsyncValue.loading()) {
+  @override
+  AsyncValue<List<Person>> build() {
     loadPeople();
+    return const AsyncValue.loading();
   }
+
+  PeopleRepository get _repository => ref.read(peopleRepositoryProvider);
 
   Future<void> loadPeople() async {
     if (!_hasMore) return;
@@ -83,9 +86,8 @@ class PeopleNotifier extends StateNotifier<AsyncValue<List<Person>>> {
 
 /// People provider
 final peopleProvider =
-    StateNotifierProvider<PeopleNotifier, AsyncValue<List<Person>>>((ref) {
-      final repository = ref.watch(peopleRepositoryProvider);
-      return PeopleNotifier(repository);
+    NotifierProvider<PeopleNotifier, AsyncValue<List<Person>>>(() {
+      return PeopleNotifier();
     });
 
 /// Search query provider

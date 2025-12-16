@@ -17,15 +17,18 @@ final planetsRepositoryProvider = Provider<PlanetsRepository>((ref) {
   return PlanetsRepositoryImpl(remoteDataSource: remoteDataSource);
 });
 
-class PlanetsNotifier extends StateNotifier<AsyncValue<List<Planet>>> {
-  final PlanetsRepository _repository;
+class PlanetsNotifier extends Notifier<AsyncValue<List<Planet>>> {
   int _currentPage = 1;
   bool _hasMore = true;
   List<Planet> _allPlanets = [];
 
-  PlanetsNotifier(this._repository) : super(const AsyncValue.loading()) {
+  @override
+  AsyncValue<List<Planet>> build() {
     loadPlanets();
+    return const AsyncValue.loading();
   }
+
+  PlanetsRepository get _repository => ref.read(planetsRepositoryProvider);
 
   Future<void> loadPlanets() async {
     if (!_hasMore) return;
@@ -72,9 +75,8 @@ class PlanetsNotifier extends StateNotifier<AsyncValue<List<Planet>>> {
 }
 
 final planetsProvider =
-    StateNotifierProvider<PlanetsNotifier, AsyncValue<List<Planet>>>((ref) {
-      final repository = ref.watch(planetsRepositoryProvider);
-      return PlanetsNotifier(repository);
+    NotifierProvider<PlanetsNotifier, AsyncValue<List<Planet>>>(() {
+      return PlanetsNotifier();
     });
 
 final planetsSearchQueryProvider = StateProvider<String>((ref) => '');
