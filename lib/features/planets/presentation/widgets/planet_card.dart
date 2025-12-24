@@ -4,7 +4,7 @@ import '../../domain/entities/planet.dart';
 class PlanetCard extends StatelessWidget {
   final Planet planet;
 
-  const PlanetCard({Key? key, required this.planet}) : super(key: key);
+  const PlanetCard({super.key, required this.planet});
 
   @override
   Widget build(BuildContext context) {

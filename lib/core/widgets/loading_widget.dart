@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class LoadingWidget extends StatelessWidget {
   final String? message;
 
-  const LoadingWidget({Key? key, this.message}) : super(key: key);
+  const LoadingWidget({super.key, this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +34,11 @@ class LoadingOverlay extends StatelessWidget {
   final String? message;
 
   const LoadingOverlay({
-    Key? key,
+    super.key,
     required this.isLoading,
     required this.child,
     this.message,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,7 @@ import '../providers/starships_provider.dart';
 import '../widgets/starship_card.dart';
 
 class StarshipsListScreen extends ConsumerStatefulWidget {
-  const StarshipsListScreen({Key? key}) : super(key: key);
+  const StarshipsListScreen({super.key});
 
   @override
   ConsumerState<StarshipsListScreen> createState() =>

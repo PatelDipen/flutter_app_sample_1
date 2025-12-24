@@ -4,7 +4,7 @@ import '../../domain/entities/starship.dart';
 class StarshipCard extends StatelessWidget {
   final Starship starship;
 
-  const StarshipCard({Key? key, required this.starship}) : super(key: key);
+  const StarshipCard({super.key, required this.starship});
 
   @override
   Widget build(BuildContext context) {

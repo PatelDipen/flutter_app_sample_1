@@ -7,7 +7,7 @@ import '../providers/planets_provider.dart';
 import '../widgets/planet_card.dart';
 
 class PlanetsListScreen extends ConsumerStatefulWidget {
-  const PlanetsListScreen({Key? key}) : super(key: key);
+  const PlanetsListScreen({super.key});
 
   @override
   ConsumerState<PlanetsListScreen> createState() => _PlanetsListScreenState();

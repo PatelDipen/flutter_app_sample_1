@@ -17,64 +17,58 @@ abstract class Failure extends Equatable {
 /// Failure for server errors (5xx)
 class ServerFailure extends Failure {
   const ServerFailure([
-    String message = 'Server error occurred',
-    int? statusCode,
-  ]) : super(message, statusCode);
+    super.message = 'Server error occurred',
+    super.statusCode,
+  ]);
 }
 
 /// Failure for unauthorized access (401)
 class UnauthorizedFailure extends Failure {
   const UnauthorizedFailure([
-    String message = 'Unauthorized access',
-    int? statusCode,
-  ]) : super(message, statusCode);
+    super.message = 'Unauthorized access',
+    super.statusCode,
+  ]);
 }
 
 /// Failure when resource is not found (404)
 class NotFoundFailure extends Failure {
   const NotFoundFailure([
-    String message = 'Resource not found',
-    int? statusCode,
-  ]) : super(message, statusCode);
+    super.message = 'Resource not found',
+    super.statusCode,
+  ]);
 }
 
 /// Failure for bad requests (400)
 class BadRequestFailure extends Failure {
-  const BadRequestFailure([String message = 'Bad request', int? statusCode])
-    : super(message, statusCode);
+  const BadRequestFailure([super.message = 'Bad request', super.statusCode]);
 }
 
 /// Failure for network connectivity issues
 class NetworkFailure extends Failure {
-  const NetworkFailure([String message = 'No internet connection'])
-    : super(message);
+  const NetworkFailure([super.message = 'No internet connection']);
 }
 
 /// Failure for request timeout
 class TimeoutFailure extends Failure {
-  const TimeoutFailure([String message = 'Request timeout']) : super(message);
+  const TimeoutFailure([super.message = 'Request timeout']);
 }
 
 /// Failure for cache operations
 class CacheFailure extends Failure {
-  const CacheFailure([String message = 'Cache error occurred'])
-    : super(message);
+  const CacheFailure([super.message = 'Cache error occurred']);
 }
 
 /// Failure for data parsing
 class ParseFailure extends Failure {
-  const ParseFailure([String message = 'Failed to parse data'])
-    : super(message);
+  const ParseFailure([super.message = 'Failed to parse data']);
 }
 
 /// Generic API failure
 class ApiFailure extends Failure {
-  const ApiFailure(String message, [int? statusCode])
-    : super(message, statusCode);
+  const ApiFailure(super.message, [super.statusCode]);
 }
 
 /// Unknown/Unexpected failure
 class UnknownFailure extends Failure {
-  const UnknownFailure([String message = 'An unknown error occurred'])
-    : super(message);
+  const UnknownFailure([super.message = 'An unknown error occurred']);
 }

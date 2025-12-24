@@ -4,7 +4,7 @@ import '../../domain/entities/person.dart';
 class PersonCard extends StatelessWidget {
   final Person person;
 
-  const PersonCard({Key? key, required this.person}) : super(key: key);
+  const PersonCard({super.key, required this.person});
 
   @override
   Widget build(BuildContext context) {

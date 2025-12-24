@@ -7,7 +7,7 @@ import '../providers/people_provider.dart';
 import '../widgets/person_card.dart';
 
 class PeopleListScreen extends ConsumerStatefulWidget {
-  const PeopleListScreen({Key? key}) : super(key: key);
+  const PeopleListScreen({super.key});
 
   @override
   ConsumerState<PeopleListScreen> createState() => _PeopleListScreenState();
