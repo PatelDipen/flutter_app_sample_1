@@ -4,7 +4,8 @@ class ApiConstants {
   ApiConstants._();
 
   // Base URLs
-  static const String swapiBaseUrl = 'https://swapi.dev/api';
+  // static const String swapiBaseUrl = 'https://swapi.dev/api';
+  static const String swapiBaseUrl = 'https://swapi.py4e.com/api';
   static const String dummyJsonBaseUrl = 'https://dummyjson.com';
 
   // SWAPI Endpoints
